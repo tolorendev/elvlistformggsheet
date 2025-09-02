@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 require("dotenv").config();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 // Cấu hình static file và EJS
 app.use(express.static("public"));
 app.set("view engine", "ejs");
