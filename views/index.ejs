@@ -1,0 +1,133 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Sheets Data</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Google Sheets Data</h1>
+    <div class="tabs" id="tabs"></div>
+    <div class="tab-content" id="content"></div>
+    <!-- <script>
+      fetch("/api/sheet")
+        .then((res) => res.json())
+        .then((data) => {
+          const tabContainer = document.getElementById("tabs");
+          const contentDiv = document.getElementById("content");
+          const sheetNames = Object.keys(data);
+          if (sheetNames.length === 0) {
+            contentDiv.innerHTML = "<p>No data found.</p>";
+            return;
+          }
+
+          sheetNames.forEach((sheetName, index) => {
+            const btn = document.createElement("button");
+            btn.textContent = sheetName;
+            btn.classList.add("tab-btn");
+            if (index === 0) btn.classList.add("active");
+
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll(".tab-btn")
+                .forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              renderTable(sheetName);
+            });
+
+            tabContainer.appendChild(btn);
+          });
+
+          function renderTable(sheetName) {
+            let rows = data[sheetName];
+            if (!rows || rows.length === 0) {
+              contentDiv.innerHTML = "<p>No data in this sheet.</p>";
+              return;
+            }
+            let html = "<table>";
+            rows.forEach((row) => {
+              html +=
+                "<tr>" +
+                row.map((cell) => "<td>" + cell + "</td>").join("") +
+                "</tr>";
+            });
+            html += "</table>";
+            contentDiv.innerHTML = html;
+          }
+
+          renderTable(sheetNames[0]);
+        })
+        .catch((err) => {
+          document.getElementById("content").innerHTML =
+            "<p>Error loading data.</p>";
+        });
+    </script> -->
+
+    <script>
+      fetch("/api/sheet")
+        .then((res) => res.json())
+        .then((data) => {
+          const tabContainer = document.getElementById("tabs");
+          const contentDiv = document.getElementById("content");
+          const sheetNames = Object.keys(data);
+          if (sheetNames.length === 0) {
+            contentDiv.innerHTML = "<p>No data found.</p>";
+            return;
+          }
+
+          sheetNames.forEach((sheetName, index) => {
+            const btn = document.createElement("button");
+            btn.textContent = sheetName;
+            btn.classList.add("tab-btn");
+            if (index === 0) btn.classList.add("active");
+
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll(".tab-btn")
+                .forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              renderTable(sheetName);
+            });
+
+            tabContainer.appendChild(btn);
+          });
+
+          function renderTable(sheetName) {
+            let rows = data[sheetName];
+            if (!rows || rows.length === 0) {
+              contentDiv.innerHTML = "<p>No data in this sheet.</p>";
+              return;
+            }
+
+            let html = "<table>";
+
+            rows.forEach((row, rowIndex) => {
+              // Nếu là header (hàng chỉ có 1 ô)
+              const isHeader = row.length === 1;
+              html += `<tr class="${isHeader ? "header-row" : ""}">`;
+
+              row.forEach((cell, cellIndex) => {
+                if (isHeader) {
+                  // Dàn trải ra 4 cột
+                  html += `<td class="header-cell" colspan="4">${cell}</td>`;
+                } else {
+                  html += `<td>${cell}</td>`;
+                }
+              });
+
+              html += "</tr>";
+            });
+
+            html += "</table>";
+            contentDiv.innerHTML = html;
+          }
+
+          renderTable(sheetNames[0]);
+        })
+        .catch((err) => {
+          document.getElementById("content").innerHTML =
+            "<p>Error loading data.</p>";
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f7f9fc;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.tab-btn {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  margin-right: 5px;
+}
+
+.tab-btn:hover {
+  background: #e0e0e0;
+}
+
+.tab-btn.active {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-bottom: 2px solid #fff;
+  color: #007bff;
+}
+
+.tab-content {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 0 6px 6px 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  max-width: 1200px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Căn giữa trang */
+  overflow-x: auto; /* Thêm scroll ngang nếu bảng quá rộng */
+}
+
+table {
+  width: auto; /* Không full width, chỉ rộng bằng dữ liệu */
+  border-collapse: collapse;
+  margin-top: 10px;
+  min-width: 400px; /* Đặt min width để bảng không quá bé */
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/*  */
+
+/* Cột mô tả: rộng 50% (5 phần trên tổng 10) */
+table th:first-child,
+table td:first-child {
+  width: 50%;
+}
+
+/* Các cột còn lại */
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 100px; /* Model */
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 100px; /* Hãng sản xuất */
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+  width: 100px; /* Xuất xứ */
+}
+
+/* Xử lý format cho cac hàng tiêu đề (CNB, Bosch, Hik... */
+.header-row {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.header-cell {
+  color: #ffffff;
+  background-color: #007bff;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
